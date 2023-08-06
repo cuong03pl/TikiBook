@@ -118,38 +118,10 @@
           <!-- kết thúc đánh giá -->
 
           <!-- Bắt đầu  giá -->
-          <div class="border-b-[1px] border-b-[#ebebf0] border-b-solid px-4 py-3">
-            <h4 class="text-[14px] font-medium pb-3">Giá</h4>
-            <!-- selected   -->
-            <div>
-              <a href="" class="border-[#1a94ff] border-[1px] border-solid rounded-xl bg-blue-100 text-blue-600 text-xs leading-4 inline-block relative mb-1 px-3 py-1">40.000 -> 120.000
-              </a>
-              <a href="" class="rounded-xl bg-gray-200 text-xs leading-4 inline-block relative text-gray-800 mb-1 px-3 py-1">Dưới 40.000
-              </a>
-              <a href="" class="rounded-xl bg-gray-200 text-xs leading-4 inline-block relative text-gray-800 mb-1 px-3 py-1">40.000 -> 120.000
-              </a>
-              <a href="" class="rounded-xl bg-gray-200 text-xs leading-4 inline-block relative text-gray-800 mb-1 px-3 py-1">40.000 -> 120.000
-              </a>
-            </div>
+          <?php
+          include_once "../../UITikiBook/src/Filter/Price.php"
+          ?>
 
-            <!-- chọn khoảng giá -->
-
-            <div>
-              <div class="text-gray-600 text-xs pb-2 mt-1">
-                <span class="mt-2 pb-2 block">Chọn khoảng giá</span>
-
-                <div class="flex items-center gap-1">
-                  <input pattern="[0-9]*" placeholder="Giá từ" value="0" class="w-20 h-8 bg-white rounded text-left outline-none text-xs flex-1 border border-gray-400 px-2" />
-                  <span>-</span>
-                  <input pattern="[0-9]*" placeholder="Giá từ" value="0" class="w-20 h-8 bg-white rounded text-left outline-none text-xs flex-1 border border-gray-400 px-2" />
-                </div>
-
-                <button type="submit" class="bg-white border border-blue-500 text-xs text-blue-500 w-full mt-[8px] rounded-md px-2 py-2">
-                  Áp dụng
-                </button>
-              </div>
-            </div>
-          </div>
           <!-- kết thúc  giá -->
 
           <!-- Bắt đầu Nhà phát hành  -->

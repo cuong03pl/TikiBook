@@ -4,7 +4,7 @@ include "../../utils/utils.php";
 
 $booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
 $IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
-$sql = handleQuery($booktypeid, $IssuingCompanyID);
+$sql = handleQuerySQL($booktypeid, $IssuingCompanyID);
 
 echo $sql;
 $query = mysqli_query($con, $sql);

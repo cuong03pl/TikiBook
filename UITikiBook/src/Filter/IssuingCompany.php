@@ -9,6 +9,16 @@
     if ($bookTypeId) {
         echo "<input type=\"hidden\" name=\"booktypeid\" value=\"$bookTypeId\">";
     }
+
+    $minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
+    if ($minPrice) {
+        echo "<input type=\"hidden\" name=\"minPrice\" value=\"$minPrice\">";
+    }
+
+    $maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
+    if ($maxPrice) {
+        echo "<input type=\"hidden\" name=\"maxPrice\" value=\"$maxPrice\">";
+    }
     while ($result = mysqli_fetch_assoc($query)) {
         $IssuingCompanyID = $result["IssuingCompanyID"];
         $checked = isset($_GET["IssuingCompanyID"]) && $_GET["IssuingCompanyID"] == $IssuingCompanyID;
