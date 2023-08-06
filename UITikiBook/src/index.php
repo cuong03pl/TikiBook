@@ -152,27 +152,15 @@
           </div>
           <!-- kết thúc  giá -->
 
-          <!-- Bắt đầu Nhà cung cấp -->
-          <div class="border-b-[1px] border-b-[#ebebf0] border-b-solid px-4 py-3">
-            <h4 class="text-[14px] font-medium pb-3">Nhà cung cấp</h4>
-            <div class="flex items-center gap-2 mb-3">
-              <input type="checkbox" name="" id="" checked="true" />
-              <span class="text-[12px] font-normal text-[#38383d]">Nhà sách Fahasa</span>
-            </div>
-            <div class="flex items-center gap-2 mb-3">
-              <input type="checkbox" name="" id="" checked="true" />
-              <span class="text-[12px] font-normal text-[#38383d]">Nhà sách Fahasa</span>
-            </div>
-            <div class="flex items-center gap-2 mb-3">
-              <input type="checkbox" name="" id="" checked="true" />
-              <span class="text-[12px] font-normal text-[#38383d]">Nhà sách Fahasa</span>
-            </div>
-            <div class="flex items-center gap-2 mb-3">
-              <input type="checkbox" name="" id="" checked="true" />
-              <span class="text-[12px] font-normal text-[#38383d]">Nhà sách Fahasa</span>
-            </div>
-          </div>
-          <!-- kết thúc  Nhà cung cấp -->
+          <!-- Bắt đầu Nhà phát hành  -->
+          <?php
+
+          include_once "../../UITikiBook/src/Filter/IssuingCompany.php"
+          ?>
+
+
+
+          <!-- kết thúc  Nhà phát hành  -->
 
           <!-- Bắt đầu giao hàng -->
           <div class="border-b-[1px] border-b-[#ebebf0] border-b-solid px-4 py-3">

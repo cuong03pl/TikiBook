@@ -1,8 +1,15 @@
 <?php
 require_once "../../database/database.php";
 include "../../utils/utils.php";
-$sql = "select * from products";
+
+if (isset($_GET["booktypeid"])) {
+  $booktypeid = $_GET["booktypeid"];
+  $sql = "select * from products where  BookTypeID = $booktypeid ";
+} else {
+  $sql = "select * from products ";
+}
 $query = mysqli_query($con, $sql);
+
 
 
 echo "<div class=\"grid grid-cols-5 mt-2 gap-2\">";
