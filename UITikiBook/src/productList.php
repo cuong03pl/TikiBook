@@ -4,7 +4,9 @@ include "../../utils/utils.php";
 
 $booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
 $IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
-$sql = handleQuerySQL($booktypeid, $IssuingCompanyID);
+$minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
+$maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
+$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice);
 
 echo $sql;
 $query = mysqli_query($con, $sql);
