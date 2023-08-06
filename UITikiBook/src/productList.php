@@ -2,16 +2,12 @@
 require_once "../../database/database.php";
 include "../../utils/utils.php";
 
-if (isset($_GET["booktypeid"])) {
-  $booktypeid = $_GET["booktypeid"];
-  $sql = "select * from products where  BookTypeID = $booktypeid ";
-} else {
-  $sql = "select * from products ";
-}
+$booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
+$IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
+$sql = handleQuery($booktypeid, $IssuingCompanyID);
+
+echo $sql;
 $query = mysqli_query($con, $sql);
-
-
-
 echo "<div class=\"grid grid-cols-5 mt-2 gap-2\">";
 while ($result = mysqli_fetch_assoc($query)) {
   echo

@@ -157,9 +157,6 @@
 
           include_once "../../UITikiBook/src/Filter/IssuingCompany.php"
           ?>
-
-
-
           <!-- kết thúc  Nhà phát hành  -->
 
           <!-- Bắt đầu giao hàng -->

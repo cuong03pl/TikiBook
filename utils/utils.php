@@ -29,3 +29,13 @@ function convertSoldOut($soldOutCount)
 
   return $soldOutCount;
 }
+
+function handleQuery($booktypeid, $IssuingCompanyID)
+{
+  $sql = "select * from products ";
+  if (!is_null($booktypeid) || !is_null($IssuingCompanyID)) $sql .= " where ";
+  if (!is_null($booktypeid)) $sql .= "BookTypeID = $booktypeid ";
+  if (!is_null($IssuingCompanyID)) $sql .= "and IssuingCompanyID = $IssuingCompanyID ";
+
+  return $sql;
+}
