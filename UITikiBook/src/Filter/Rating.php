@@ -4,6 +4,10 @@ require_once "../../database/database.php";
 $sql = "select * from booktype";
 $query = mysqli_query($con, $sql);
 $param = null;
+$q = isset($_GET["q"]) ? $_GET["q"] : null;
+if (!is_null($q)) {
+    $param .= "&q=$q";
+}
 $booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
 if (!is_null($booktypeid)) {
     $param .= "&booktypeid=$booktypeid";

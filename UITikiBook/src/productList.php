@@ -7,11 +7,14 @@ $IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"]
 $minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
 $maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
 $rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
-$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating);
-echo  $rating;
+$q = isset($_GET["q"]) ? $_GET["q"] : null;
+$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating, $q);
 echo $sql;
 $query = mysqli_query($con, $sql);
+echo $q ?  " <h1>Kết quả tìm kiếm của \"$q\"</h1>" : "";
 echo "<div class=\"grid grid-cols-5 mt-2 gap-2\">";
+
+
 while ($result = mysqli_fetch_assoc($query)) {
   echo
   "  <a href=\"\" class=\"bg-white\">

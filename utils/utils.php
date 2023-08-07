@@ -30,29 +30,37 @@ function convertSoldOut($soldOutCount)
   return $soldOutCount;
 }
 
-function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating)
+function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating, $q)
 {
   echo $minPrice;
   $sql = "select * from products ";
 
-  if (!is_null($booktypeid) || !is_null($IssuingCompanyID) || !is_null($maxPrice) || !is_null($minPrice) || !is_null($rating)) $sql .= " where ";
+  if (!is_null($q) || !is_null($booktypeid) || !is_null($IssuingCompanyID) || !is_null($maxPrice) || !is_null($minPrice) || !is_null($rating)) $sql .= " where ";
 
-  if (!is_null($booktypeid)) $sql .= "BookTypeID = $booktypeid ";
+  if (!is_null($q)) $sql .= "ProductName like '%$q%' ";
+
+
+  if (!is_null($booktypeid)) {
+    if (!is_null($q)) {
+
+      $sql .= " and BookTypeID = $booktypeid ";
+    } else  $sql .= "BookTypeID = $booktypeid ";
+  }
 
   if (!is_null($IssuingCompanyID)) {
-    if (!is_null($booktypeid))  $sql .= "and IssuingCompanyID = $IssuingCompanyID ";
+    if (!is_null($booktypeid) || !is_null($q))  $sql .= "and IssuingCompanyID = $IssuingCompanyID ";
     else  $sql .= " IssuingCompanyID = $IssuingCompanyID ";
   }
 
   if (!is_null($maxPrice) || !is_null($minPrice)) {
-    if (!is_null($IssuingCompanyID) || !is_null($booktypeid)) {
+    if (!is_null($IssuingCompanyID) || !is_null($booktypeid) || !is_null($q)) {
       if (is_null($minPrice)) $sql .= " and Price < $maxPrice ";
       else $sql .= "and Price between $minPrice and $maxPrice ";
     } else $sql .= " Price between $minPrice and $maxPrice ";
   }
 
   if (!is_null($rating)) {
-    if (!is_null($IssuingCompanyID) || !is_null($booktypeid) || !is_null($maxPrice) || !is_null($minPrice)) {
+    if (!is_null($IssuingCompanyID) || !is_null($booktypeid) || !is_null($maxPrice) || !is_null($minPrice) || !is_null($q)) {
       $sql .= " and rating >= $rating ";
     } else {
       $sql .= " rating >= $rating ";

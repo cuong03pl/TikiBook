@@ -5,6 +5,10 @@
     $sql = "select * from issuingcompany";
     $query = mysqli_query($con, $sql);
 
+    $q = isset($_GET["q"]) ? $_GET["q"] : null;
+    if ($q) {
+        echo "<input type=\"hidden\" name=\"q\" value=\"$q\">";
+    }
     $bookTypeId = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
     if ($bookTypeId) {
         echo "<input type=\"hidden\" name=\"booktypeid\" value=\"$bookTypeId\">";

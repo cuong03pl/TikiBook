@@ -3,8 +3,14 @@ require_once "../../database/database.php";
 
 $sql = "select * from booktype";
 $query = mysqli_query($con, $sql);
-$IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
 $param = null;
+
+
+$q = isset($_GET["q"]) ? $_GET["q"] : null;
+if (!is_null($q)) {
+    $param .= "&q=$q";
+}
+$IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
 if (!is_null($IssuingCompanyID)) {
     $param .= "&IssuingCompanyID=$IssuingCompanyID";
 }
