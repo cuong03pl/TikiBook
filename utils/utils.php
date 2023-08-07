@@ -30,12 +30,15 @@ function convertSoldOut($soldOutCount)
   return $soldOutCount;
 }
 
-function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice)
+function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating)
 {
   echo $minPrice;
   $sql = "select * from products ";
-  if (!is_null($booktypeid) || !is_null($IssuingCompanyID) || !is_null($maxPrice) || !is_null($minPrice)) $sql .= " where ";
+
+  if (!is_null($booktypeid) || !is_null($IssuingCompanyID) || !is_null($maxPrice) || !is_null($minPrice) || !is_null($rating)) $sql .= " where ";
+
   if (!is_null($booktypeid)) $sql .= "BookTypeID = $booktypeid ";
+
   if (!is_null($IssuingCompanyID)) {
     if (!is_null($booktypeid))  $sql .= "and IssuingCompanyID = $IssuingCompanyID ";
     else  $sql .= " IssuingCompanyID = $IssuingCompanyID ";
@@ -47,6 +50,15 @@ function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice)
       else $sql .= "and Price between $minPrice and $maxPrice ";
     } else $sql .= " Price between $minPrice and $maxPrice ";
   }
+
+  if (!is_null($rating)) {
+    if (!is_null($IssuingCompanyID) || !is_null($booktypeid) || !is_null($maxPrice) || !is_null($minPrice)) {
+      $sql .= " and rating >= $rating ";
+    } else {
+      $sql .= " rating >= $rating ";
+    }
+  }
+
 
   return $sql;
 }

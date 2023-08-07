@@ -6,8 +6,9 @@ $booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
 $IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
 $minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
 $maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
-$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice);
-
+$rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
+$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating);
+echo  $rating;
 echo $sql;
 $query = mysqli_query($con, $sql);
 echo "<div class=\"grid grid-cols-5 mt-2 gap-2\">";

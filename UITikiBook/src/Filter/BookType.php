@@ -16,7 +16,10 @@ $maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
 if (!is_null($maxPrice)) {
     $param .= "&maxPrice=$maxPrice";
 }
-
+$rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
+if (!is_null($rating)) {
+    $param .= "&rating=$rating";
+}
 
 echo "<div class=\"border-b-[1px] border-b-[#ebebf0] border-b-solid px-4 py-3\">
 <h4 class=\"text-[14px] font-medium pb-3\">Danh Mục Sản Phẩm</h4>";

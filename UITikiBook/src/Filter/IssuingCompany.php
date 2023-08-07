@@ -19,6 +19,10 @@
     if ($maxPrice) {
         echo "<input type=\"hidden\" name=\"maxPrice\" value=\"$maxPrice\">";
     }
+    $rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
+    if ($maxPrice) {
+        echo "<input type=\"hidden\" name=\"rating\" value=\"$rating\">";
+    }
     while ($result = mysqli_fetch_assoc($query)) {
         $IssuingCompanyID = $result["IssuingCompanyID"];
         $checked = isset($_GET["IssuingCompanyID"]) && $_GET["IssuingCompanyID"] == $IssuingCompanyID;

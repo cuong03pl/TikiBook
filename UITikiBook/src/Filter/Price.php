@@ -16,6 +16,10 @@
             if ($IssuingCompanyID) {
                 echo "<input type=\"hidden\" name=\"IssuingCompanyID\" value=\"$IssuingCompanyID\">";
             }
+            $rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
+            if ($rating) {
+                echo "<input type=\"hidden\" name=\"rating\" value=\"$rating\">";
+            }
             ?>
             <div class="flex items-center gap-1">
                 <input pattern="[0-9]*" name="minPrice" value="0" class="w-20 h-8 bg-white rounded text-left outline-none text-xs flex-1 border border-gray-400 px-2" />
