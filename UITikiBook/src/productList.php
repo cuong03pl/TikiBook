@@ -2,26 +2,15 @@
 require_once "../../database/database.php";
 include "../../utils/utils.php";
 
-$booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
-$IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
-$minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
-$maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
-$rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
-$q = isset($_GET["q"]) ? $_GET["q"] : null;
-$sql = handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating, $q);
-echo $sql;
-$query = mysqli_query($con, $sql);
+$page = isset($_GET["page"]) ? $_GET["page"] : 1;
+
+$sql = handleQuerySQL($page);
+
 echo $q ?  " <h1>Kết quả tìm kiếm của \"$q\"</h1>" : "";
 
-
-$query2 = mysqli_query($con, $sql);
-$i = 0;
-while (mysqli_fetch_assoc($query2)) {
-  $i++;
-}
-
-
-if ($i > 0) {
+$query = mysqli_query($con, $sql);
+$number_of_result = mysqli_num_rows($query);
+if ($number_of_result > 0) {
   echo "<div class=\"grid grid-cols-5 mt-2 gap-2\">";
   while ($result = mysqli_fetch_assoc($query)) {
     echo
@@ -74,32 +63,7 @@ if ($i > 0) {
   echo "</div>";
 
   // <!-- Kết thúc product -->
-  echo "
-  <!-- pagination -->
-  <div class=\"flex justify-center mt-[70px] mb-[20px]\">
-    <nav class=\"isolate inline-flex -space-x-px rounded-md shadow-sm\" aria-label=\"Pagination\">
-      <a href=\"#\" class=\"relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0\">
-        <span class=\"sr-only\">Previous</span>
-        <svg class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">
-          <path fill-rule=\"evenodd\" d=\"M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z\" clip-rule=\"evenodd\" />
-        </svg>
-      </a>
-      <!-- Current: \"z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600\", Default: \"text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0\" -->
-      <a href=\"#\" aria-current=\"page\" class=\"relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600\">1</a>
-      <a href=\"#\" class=\"relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0\">2</a>
-      <a href=\"#\" class=\"relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex\">3</a>
-      <span class=\"relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0\">...</span>
-      <a href=\"#\" class=\"relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex\">8</a>
-      <a href=\"#\" class=\"relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0\">9</a>
-      <a href=\"#\" class=\"relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0\">10</a>
-      <a href=\"#\" class=\"relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0\">
-        <span class=\"sr-only\">Next</span>
-        <svg class=\"h-5 w-5\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">
-          <path fill-rule=\"evenodd\" d=\"M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z\" clip-rule=\"evenodd\" />
-        </svg>
-      </a>
-    </nav>
-  </div>";
+  include_once "../../UITikiBook/src/Filter/Pagination.php";
 } else echo "
 <div class=\"px-[24px] py-[16px] bg-white  mt-[12px]\">
     <div class=\"bg-white justify-center border-2 border-yellow-300 text-yellow-500 p-4 flex\">  Rất tiếc, không tìm thấy sản phẩm phù hợp với lựa chọn của bạn </div> 

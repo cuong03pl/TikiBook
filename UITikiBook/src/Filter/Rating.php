@@ -1,5 +1,5 @@
 <?php
-require_once "../../database/database.php";
+
 
 $sql = "select * from booktype";
 $query = mysqli_query($con, $sql);

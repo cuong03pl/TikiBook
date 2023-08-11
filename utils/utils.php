@@ -30,9 +30,14 @@ function convertSoldOut($soldOutCount)
   return $soldOutCount;
 }
 
-function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $rating, $q)
+function handleQuerySQL($page)
 {
-  echo $minPrice;
+  $booktypeid = isset($_GET["booktypeid"]) ? $_GET["booktypeid"] : null;
+  $IssuingCompanyID = isset($_GET["IssuingCompanyID"]) ? $_GET["IssuingCompanyID"] : null;
+  $minPrice = isset($_GET["minPrice"]) ? $_GET["minPrice"] : null;
+  $maxPrice = isset($_GET["maxPrice"]) ? $_GET["maxPrice"] : null;
+  $rating = isset($_GET["rating"]) ? $_GET["rating"] : null;
+  $q = isset($_GET["q"]) ? $_GET["q"] : null;
   $sql = "select * from products ";
 
   if (!is_null($q) || !is_null($booktypeid) || !is_null($IssuingCompanyID) || !is_null($maxPrice) || !is_null($minPrice) || !is_null($rating)) $sql .= " where ";
@@ -65,6 +70,11 @@ function handleQuerySQL($booktypeid, $IssuingCompanyID, $minPrice, $maxPrice, $r
     } else {
       $sql .= " rating >= $rating ";
     }
+  }
+
+  if (!is_null($page)) {
+    $dongbatdau = 5 * ($page - 1);
+    $sql .=  "  LIMIT $dongbatdau , 5";
   }
 
 
